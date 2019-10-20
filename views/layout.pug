@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="/css/normalize.css")
+        link(rel="stylesheet", href="/css/app.css")
+        title= nombrePagina
+    body
+        header.barra
+            h1 UP-TASK Admin de Proyectos
+            a(href="#") Cerrar Sesión
+
+        main.contenedor
+            aside.contenedor-proyectos
+                .panel.crear-proyrcto
+                    a(href="/nuevo-proyecto" class="boton") New Proj
+                        span +
+                .panel.lista-proyectos
+                    h2 Proyectos
+                    ul#proyectos.proyectos
+                        li
+                            a(href="#") Tiendita virtual
+                        li
+                            a(href="#") Empresa personal
+                        li
+                            a(href="#") Portafolio
+                        li
+                            a(href="#") EscomMunity
+            block content
