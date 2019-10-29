@@ -1,4 +1,5 @@
 const Proyectos = require('../models/Proyectos');
+const slug = require('slug');
 
 exports.proyectosHome = (req, res) => {
     res.render('index', {
@@ -27,7 +28,9 @@ exports.nuevoProyecto = async(req, res) => {
             errores
         })
     } else {
-        const proyecto = await Proyectos.create({ nombre });
+        const url = slug(nombre).toLocaleLowerCase();
+        const proyecto = await Proyectos.create({ nombre, url }); //Diccionario de contexto
+        // Una vez que se inserte el elemento que me lleve al home
         res.redirect('/');
     }
 };

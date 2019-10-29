@@ -5,11 +5,7 @@ const bodyParser = require('body-parser'); //Nospermite leer datos del fomrulari
 
 // crear conexion a la base de datos
 const db = require('./config/db');
-
-// Importamos el modelo
 require('./models/Proyectos');
-
-
 db.sync()
     .then(() => console.log('Conectado al servidor'))
     .catch(error => console.log(error));
