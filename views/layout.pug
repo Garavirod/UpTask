@@ -20,12 +20,8 @@ html(lang="en")
                 .panel.lista-proyectos
                     h2 Proyectos
                     ul#proyectos.proyectos
-                        li
-                            a(href="#") Tiendita virtual
-                        li
-                            a(href="#") Empresa personal
-                        li
-                            a(href="#") Portafolio
-                        li
-                            a(href="#") EscomMunity
+                        if (proyectos.length)
+                            each project in proyectos
+                                li
+                                    a(href="#")= project.nombre
             block content

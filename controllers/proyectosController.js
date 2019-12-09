@@ -1,9 +1,11 @@
 const Proyectos = require('../models/Proyectos');
-const slug = require('slug');
 
-exports.proyectosHome = (req, res) => {
+
+exports.proyectosHome = async(req, res) => {
+    const proyectos = await Proyectos.findAll();
     res.render('index', {
-        nombrePagina: 'Proyectos'
+        nombrePagina: 'Proyectos',
+        proyectos
     });
 };
 
@@ -43,8 +45,8 @@ exports.nuevoProyecto = async(req, res) => {
             errores
         })
     } else {
-        const url = slug(nombre).toLocaleLowerCase();
-        const proyecto = await Proyectos.create({ nombre, url }); //Diccionario de contexto
+        // const url = slug(nombre).toLocaleLowerCase();
+        const proyecto = await Proyectos.create({ nombre }); //Diccionario de contexto
         // Una vez que se inserte el elemento que me lleve al home
         res.redirect('/');
     }
