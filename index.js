@@ -1,12 +1,12 @@
 const express = require('express');
 const routes = require('./routes');
 const path = require('path');
-const bodyParser = require('body-parser'); //Nospermite leer datos del fomrulario, es parte de express
+const bodyParser = require('body-parser'); //Nos permite leer datos del fomrulario, es parte de express
 
 // crear conexion a la base de datos
 const db = require('./config/db');
 require('./models/Proyectos');
-db.sync()
+db.sync() //Nos crea toda la estructura del modelo "Proyecto"
     .then(() => console.log('Conectado al servidor'))
     .catch(error => console.log(error));
 

@@ -12,7 +12,22 @@ exports.formularioProyecto = (req, res) => {
         nombrePagina: 'Nuevo Proyecto'
     });
 };
-
+// Declaramos una función asíncrona.
+/*
+ * puede contener una expresión await, 
+ * la cual pausa la ejecución de la función asíncrona y 
+ * espera la resolución de la Promise pasada y, a continuación, 
+ * reanuda la ejecución de la función async y devuelve el valor resuelto.
+ * 
+ * simplificar aun más la forma en que trabajamos con las promesas,
+ * Al hacer una función asíncrona va a retornan simpre una promesa. 
+ * (Va a estar dentro de una promesa)
+ * 
+ * Lo primero que debemos de saber es que el operador await esperará hasta 
+ * que la promesa sea resuelta, lo que provocará que el hilo de ejecución
+ *  hasta que la promesa se resuelva, 
+ * y una vez resuelta, el hilo de ejecución continuará donde se quedo.
+ */
 exports.nuevoProyecto = async(req, res) => {
     // console.log(req.body);
     // Validamos que el fomrularo no esté vacio
