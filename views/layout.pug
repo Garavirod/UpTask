@@ -23,7 +23,7 @@ html(lang="en")
                         if (proyectos.length)
                             each project in proyectos
                                 li
-                                    a(href="${}")= project.nombre
+                                    a(href=`/proyectos/${project.url}`)= project.nombre
             block content
             //- Los resultados de una consulta hecha por el controlador
-            pre= vardump(proyectos) 
+            //- pre= vardump(proyectos) 

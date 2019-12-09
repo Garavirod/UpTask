@@ -9,9 +9,12 @@ exports.proyectosHome = async(req, res) => {
     });
 };
 
-exports.formularioProyecto = (req, res) => {
+exports.formularioProyecto = async(req, res) => {
+    const proyectos = await Proyectos.findAll();
+
     res.render('nuevoProyecto', {
-        nombrePagina: 'Nuevo Proyecto'
+        nombrePagina: 'Nuevo Proyecto',
+        proyectos
     });
 };
 // Declaramos una función asíncrona.
@@ -35,6 +38,8 @@ exports.nuevoProyecto = async(req, res) => {
     // Validamos que el fomrularo no esté vacio
     const { nombre } = req.body;
     let errores = [];
+    const proyectos = await Proyectos.findAll();
+
     if (!nombre) {
         errores.push({ 'texto': 'Agrega un nomnbre al proyecto' })
     }
@@ -42,7 +47,8 @@ exports.nuevoProyecto = async(req, res) => {
     if (errores.length > 0) {
         res.render('nuevoProyecto', {
             nombrePagina: 'Nuevo Proyecto',
-            errores
+            errores,
+            proyectos
         })
     } else {
         // const url = slug(nombre).toLocaleLowerCase();
@@ -51,3 +57,25 @@ exports.nuevoProyecto = async(req, res) => {
         res.redirect('/');
     }
 };
+
+
+exports.proyectoPorUrl = async(req, res, next) => {
+    // res.send(req.params.url)
+    // res.send('LISTO');
+    const proyectos = await Proyectos.findAll();
+
+    const proyecto = await Proyectos.findOne({
+        where: {
+            url: req.params.url
+        }
+    });
+    if (!proyecto) return next(); // De no haber proyecto, coramos aqui y pasamos al sig meddleware
+    console.log(proyecto);
+    // Renderizamos la vista
+    res.render('tareas', {
+        nombrePagina: 'Tareas del proyecto',
+        proyecto,
+        proyectos
+    });
+
+}

@@ -13,6 +13,10 @@ module.exports = function() {
     router.get('/nuevo-proyecto', proyectosController.formularioProyecto);
     router.post('/nuevo-proyecto',
         body('nombre').not().isEmpty().trim().escape(), //Sanitizamos el camṕo 'nombre'
-        proyectosController.nuevoProyecto);
+        proyectosController.nuevoProyecto
+    );
+    // Listar proyectos
+    // :url es un comidín, el nombre puede cambiar a lo que sea minetras tenga el comodín ':'
+    router.get('/proyectos/:url', proyectosController.proyectoPorUrl);
     return router;
 }
