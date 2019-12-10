@@ -62,13 +62,16 @@ exports.nuevoProyecto = async(req, res) => {
 exports.proyectoPorUrl = async(req, res, next) => {
     // res.send(req.params.url)
     // res.send('LISTO');
-    const proyectos = await Proyectos.findAll();
-
-    const proyecto = await Proyectos.findOne({
-        where: {
-            url: req.params.url
+    /**Si tenemos múltiples consultas independientes podemos implmenatrr el código de la sig manera
+     * en un arreglo de Promises
+     */
+    const proyectosPromise = Proyectos.findAll();
+    const proyectoPromise = Proyectos.findOne({
+        where:{
+            id: req.params.url //En el router debe contener la palabra id del comodin
         }
     });
+    const [proyectos,proyecto] = await Promise.all([proyectosPromise,proyectoPromise]);
     if (!proyecto) return next(); // De no haber proyecto, coramos aqui y pasamos al sig meddleware
     console.log(proyecto);
     // Renderizamos la vista
@@ -81,9 +84,17 @@ exports.proyectoPorUrl = async(req, res, next) => {
 }
 
 exports.formularioEditar = async(req, res) => {
-    const proyectos = await Proyectos.findAll();
+    const proyectosPromise = Proyectos.findAll();
+    const proyectoPromise = Proyectos.findOne({
+        where:{
+            id: req.params.id //En el router debe contener la palabra id del comodin
+        }
+    });
+    const [proyectos,proyecto] = await Promise.all([proyectosPromise,proyectoPromise]);
+    //Renderizamos con su diccionario de contexto
     res.render('nuevoProyecto', {
         nombrePagina: 'Editar Proyecto',
-        proyectos
+        proyectos,
+        proyecto
     });
 }
