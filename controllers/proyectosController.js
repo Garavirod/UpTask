@@ -68,7 +68,7 @@ exports.proyectoPorUrl = async(req, res, next) => {
     const proyectosPromise = Proyectos.findAll();
     const proyectoPromise = Proyectos.findOne({
         where:{
-            id: req.params.url //En el router debe contener la palabra id del comodin
+            url: req.params.url //En el router debe contener la palabra id del comodin
         }
     });
     const [proyectos,proyecto] = await Promise.all([proyectosPromise,proyectoPromise]);
