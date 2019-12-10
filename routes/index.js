@@ -18,5 +18,8 @@ module.exports = function() {
     // Listar proyectos
     // :url es un comidín, el nombre puede cambiar a lo que sea minetras tenga el comodín ':'
     router.get('/proyectos/:url', proyectosController.proyectoPorUrl);
+
+    // Actyalizar proyecto
+    router.get('/proyecto/editar/:id', proyectosController.formularioEditar);
     return router;
 }
