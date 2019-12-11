@@ -21,5 +21,12 @@ module.exports = function() {
 
     // Actyalizar proyecto
     router.get('/proyecto/editar/:id', proyectosController.formularioEditar);
+
+    //Update proyecto en la BD
+    router.post('/nuevo-proyecto/:id',
+        body('nombre').not().isEmpty().trim().escape(), //Sanitizamos el camṕo 'nombre'
+        proyectosController.actualizarProyecto
+    );
+
     return router;
 }

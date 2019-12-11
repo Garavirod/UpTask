@@ -98,3 +98,31 @@ exports.formularioEditar = async(req, res) => {
         proyecto
     });
 }
+
+exports.actualizarProyecto = async(req, res) => {
+    // console.log(req.body);
+    // Validamos que el fomrularo no esté vacio
+    const { nombre } = req.body;
+    let errores = [];
+    const proyectos = await Proyectos.findAll();
+
+    if (!nombre) {
+        errores.push({ 'texto': 'Agrega un nomnbre al proyecto' })
+    }
+    // Si existen errores
+    if (errores.length > 0) {
+        res.render('nuevoProyecto', {
+            nombrePagina: 'Nuevo Proyecto',
+            errores,
+            proyectos
+        })
+    } else {
+        // const url = slug(nombre).toLocaleLowerCase();
+        await Proyectos.update(
+            { nombre: nombre },
+            {where: {id: req.params.id}
+        }); //Diccionario de contexto
+        // Una vez que se inserte el elemento que me lleve al home
+        res.redirect('/');
+    }
+};
