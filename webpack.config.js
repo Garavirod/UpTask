@@ -5,7 +5,7 @@ module.exports = {
     entry: './public/js/app.js',
     output: {
         filename: 'bundle.js', //Archivo de salida
-        path: path.join(__dirname, "./public/dist") //Creamos una nueva carptea
+        path: path.join(__dirname, './public/dist') //Creamos una nueva carptea
     },
     module: {
         rules: [{

@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "nodemon ./index.js",
         "start": "concurrently \"npm run dev \" \"npm run watch\"",
-        "watch": "webpack --w --mode development",
+        "watch": "webpack --w --mode development"
     },
     "repository": {
         "type": "git",
@@ -19,6 +19,7 @@
     },
     "homepage": "https://github.com/Garavirod/UpTask#readme",
     "dependencies": {
+        "axios": "^0.19.0",
         "concurrently": "^5.0.1",
         "express": "^4.17.1",
         "express-validator": "^6.2.0",
@@ -26,10 +27,15 @@
         "pug": "^2.0.4",
         "sequelize": "^5.19.7",
         "shortid": "^2.2.15",
-        "slug": "^1.1.0"
+        "slug": "^1.1.0",
+        "sweetalert2": "^9.5.3"
     },
     "devDependencies": {
         "@babel/core": "^7.7.5",
-        "nodemon": "^1.19.3"
+        "@babel/preset-env": "^7.7.6",
+        "babel-loader": "^8.0.6",
+        "nodemon": "^1.19.3",
+        "webpack": "^4.41.3",
+        "webpack-cli": "^3.3.10"
     }
 }
