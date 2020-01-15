@@ -134,6 +134,9 @@ exports.eliminarProyecto = async(req, res, next) => {
     const resultado = await Proyectos.destroy({
         where: { url: urlProyecto }
     });
-    // res 200 verbo htt que indica todo correcto
+    // if there exist an error between DB server and server
+    if (!resultado)
+        return next(); //Pasar al sigiente middleware y no muetsres la respuesta 200
+    // res 200 verbo http que indica todo correcto
     res.status(200).send('project has been deleted succesfuly!');
 }

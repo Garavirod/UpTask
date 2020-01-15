@@ -33,6 +33,13 @@ if (btnEliminar) {
                         setTimeout(() => {
                             window.location.href = '/'
                         }, 3000);
+                    }) //Let's capture the error if there exist
+                    .catch(() => {
+                        Swal.fire({
+                            type: 'error',
+                            title: 'THERE WAS AN ERROR',
+                            text: 'It can not delete the project, sorry!'
+                        })
                     });
             }
         })
