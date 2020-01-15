@@ -67,11 +67,11 @@ exports.proyectoPorUrl = async(req, res, next) => {
      */
     const proyectosPromise = Proyectos.findAll();
     const proyectoPromise = Proyectos.findOne({
-        where:{
+        where: {
             url: req.params.url //En el router debe contener la palabra id del comodin
         }
     });
-    const [proyectos,proyecto] = await Promise.all([proyectosPromise,proyectoPromise]);
+    const [proyectos, proyecto] = await Promise.all([proyectosPromise, proyectoPromise]);
     if (!proyecto) return next(); // De no haber proyecto, coramos aqui y pasamos al sig meddleware
     console.log(proyecto);
     // Renderizamos la vista
@@ -86,11 +86,11 @@ exports.proyectoPorUrl = async(req, res, next) => {
 exports.formularioEditar = async(req, res) => {
     const proyectosPromise = Proyectos.findAll();
     const proyectoPromise = Proyectos.findOne({
-        where:{
+        where: {
             id: req.params.id //En el router debe contener la palabra id del comodin
         }
     });
-    const [proyectos,proyecto] = await Promise.all([proyectosPromise,proyectoPromise]);
+    const [proyectos, proyecto] = await Promise.all([proyectosPromise, proyectoPromise]);
     //Renderizamos con su diccionario de contexto
     res.render('nuevoProyecto', {
         nombrePagina: 'Editar Proyecto',
@@ -118,11 +118,22 @@ exports.actualizarProyecto = async(req, res) => {
         })
     } else {
         // const url = slug(nombre).toLocaleLowerCase();
-        await Proyectos.update(
-            { nombre: nombre },
-            {where: {id: req.params.id}
+        await Proyectos.update({ nombre: nombre }, {
+            where: { id: req.params.id }
         }); //Diccionario de contexto
         // Una vez que se inserte el elemento que me lleve al home
         res.redirect('/');
     }
 };
+
+// Eliminar Proyecto
+exports.eliminarProyecto = async(req, res, next) => {
+    // query params for reading what are you sending to server
+    // console.log(req);
+    const { urlProyecto } = req.query;
+    const resultado = await Proyectos.destroy({
+        where: { url: urlProyecto }
+    });
+    // res 200 verbo htt que indica todo correcto
+    res.status(200).send('project has been deleted succesfuly!');
+}

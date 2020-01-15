@@ -18,22 +18,22 @@ if (btnEliminar) {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-            // On this block we'll send a petiton to axios
-            const url = `${location.origin}/proyectos/${urlProyecto}`;
-            axios.delete(url, { params: urlProyecto }).then(function(respuesta) { console.log(respuesta) });
-            return;
+            // On this block we'll send a petiton to axios            
             if (result.value) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                );
-                // Redirect to user to home
-                setTimeout(() => {
-                    window.location.href = '/'
-                }, 3000);
-
-
+                const url = `${location.origin}/proyectos/${urlProyecto}`;
+                axios.delete(url, { params: { urlProyecto } })
+                    .then(function(respuesta) {
+                        console.log(respuesta);
+                        Swal.fire(
+                            'Deleted!',
+                            respuesta.data,
+                            'success'
+                        );
+                        // // Redirect to user to home
+                        setTimeout(() => {
+                            window.location.href = '/'
+                        }, 3000);
+                    });
             }
         })
     });
