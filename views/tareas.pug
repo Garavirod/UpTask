@@ -3,9 +3,14 @@ block content
     .contenido-principal
         h1 #{nombrePagina} - #{proyecto.nombre}
         //- TODO FORMULARIO
-
+        form.agregar-tarea(action=`/proyectos/${proyecto.url}` method='POST')
+            .campo
+                label(for="tarea") Tarea:
+                //- El atributo name no sirve del lado el back, para extraeer el valor
+                input.nombre-tarea(type="text", name="tarea" placeholder="Nombre tarea")
+            .campo-enviar
+                input.boton.nueva-tarea(type="submit", value="Agregar")
         //- TODO LISTADO DE PENDIENTES
-
         //- pre= vardump(proyecto)
         //- ACCIONES QUE SE PUEDEN REALIZAR
         .contenedor-acciones
