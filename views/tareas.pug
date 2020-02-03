@@ -11,7 +11,7 @@ block content
             .campo-enviar
                 input.boton.nueva-tarea(type="submit", value="Agregar")
         //- TODO LISTADO DE PENDIENTES
-        //- pre= vardump(proyecto)
+        pre= vardump(tareas)
         //- ACCIONES QUE SE PUEDEN REALIZAR
         .contenedor-acciones
             a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar proyecto

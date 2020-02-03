@@ -36,9 +36,9 @@ app.use((req, res, next) => {
      */
     res.locals.vardump = helpers.vardupm; //Lo hacemos visible para toda la aplicación
     next(); //una vez ejecutada la acción pasar al sig meadlewere
-}); //Se ejecuta en todos los verbosd e http
+}); //Se ejecuta en todos los verbos de http
 
-// Habilitamos bodyPArser para leer datos del formulario
+// Habilitamos bodyParser para leer datos del formulario
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Rutas para el home

@@ -1,5 +1,5 @@
 const Proyectos = require('../models/Proyectos');
-
+const Tareas = require('../models/Tareas');
 
 exports.proyectosHome = async(req, res) => {
     const proyectos = await Proyectos.findAll();
@@ -72,13 +72,27 @@ exports.proyectoPorUrl = async(req, res, next) => {
         }
     });
     const [proyectos, proyecto] = await Promise.all([proyectosPromise, proyectoPromise]);
+    // Consultaos las tareas del proyecto actual
+    const tareas = await Tareas.findAll({
+        where: {
+            proyectoId: proyecto.id
+        },
+        //We can get the full object
+        // include: [
+        //     { model: Proyectos }
+        // ]
+    });
+    console.log(tareas);
+
+
     if (!proyecto) return next(); // De no haber proyecto, coramos aqui y pasamos al sig meddleware
     console.log(proyecto);
-    // Renderizamos la vista
+    // Renderizamos la vista   
     res.render('tareas', {
         nombrePagina: 'Tareas del proyecto',
         proyecto,
-        proyectos
+        proyectos,
+        tareas //Renderizamos las tareas en la vista
     });
 
 }
